@@ -1,8 +1,10 @@
-let genero = prompt("femenino o masculino")
-let edad = prompt("Edad")
-let ayuda;
+let genero, edad, ayuda
 
-if (genero === "femenino") {
+while(true){
+genero = prompt("femenino o masculino")
+edad = prompt("Edad")
+
+if (genero == "femenino") {
     if (edad > 50) {
         ayuda = 120000
     } else if (edad >= 30 && edad <= 50) {
@@ -10,9 +12,11 @@ if (genero === "femenino") {
     } else {
         ayuda = 0
     }
-} else if (genero === "masculino") {
+    break
+} else if (genero == "masculino") {
     ayuda = 40000
+    break
 } else {
-    ayuda = 0
-}
+    alert("error")
+}}
 alert(`El valor de ayuda mensual es: $${ayuda}`)
