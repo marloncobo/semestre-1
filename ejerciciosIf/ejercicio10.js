@@ -1,20 +1,22 @@
-let imprimir, preciocopia
-while (true){
-imprimir = Number(prompt("Número de copias"))
+function hojas(){
+    let imprimir = prompt("Número de copias")
+    if (imprimir>=0 && imprimir<=499){
+        return {precio: 120, imprimir}
+    } else if (imprimir>=500 && imprimir<=749){
+        return {precio : 100, imprimir}
+    }else if (imprimir>=750 && imprimir<=999){
+        return {precio:80, imprimir}
+    }else if (imprimir>=1000){
+        return {precio: 50, imprimir}
+    }else {
+        alert("Número no valido")
+        return hojas()
+    }
+}
+function resultado(){
+    let datos = hojas()
+    let total = datos.imprimir*datos.precio
+    alert(`El precio por copia es ${datos.precio} y su valor total es ${total}`)
+}
 
-if (imprimir>=0 && imprimir<=499){
-    preciocopia=120
-    break
-} else if (imprimir>=500 && imprimir<=749){
-    preciocopia=100
-    break
-}else if (imprimir>=750 && imprimir<=999){
-    preciocopia=80
-    break
-}else if (imprimir>=1000){
-    preciocopia=50
-    break
-}else {alert("Número no valido")
-}}
-let total = preciocopia*imprimir
-alert(`El precio por copia es ${preciocopia} y su valor total es ${total}`)
+resultado()

@@ -1,39 +1,63 @@
 let operador, minInter, paqueteDatos
-let minInterCon = Number(prompt("Ingresa la cantidad de minutos internacionales consumidos"));
+let minInterCon = Number(prompt("Ingresa la cantidad de minutos internacionales consumidos"))
 let cargoFijo = 0
 
-while (true){
-operador = prompt("Ingresa el operador (claro, tigo, movistar)")
-minInter = confirm("¿Quieres minutos internacionales?")
-paqueteDatos = confirm("¿Quieres un paquete de datos?")
-if (operador="tigo") {
-    cargoFijo = 45000
-    if (minInter !== false){
-        minInter = 200
+function calcularCargoFijo(operador) {
+    switch (operador) {
+        case "tigo":
+            return 45000
+        case "claro":
+            return 30000
+        case "movistar":
+            return 40000
+        default:
+            alert("Operador no válido")
+            return 0
     }
-    if (paqueteDatos !== false){
-       paqueteDatos = 12000
-    }break
-}else if (operador="claro"){
-    cargoFijo = 30000
-    if (minInter !== false){
-        minInter = 100
-    }
-    if (paqueteDatos !== false){
-        paqueteDatos = 18000;
-    }break
-}else if (operador=="movistar"){
-    cargoFijo = 40000
-    if (minInter !== false){
-        minInter = 250
-    }
-    if (paqueteDatos !== false){
-        paqueteDatos = 8000
-    }break;
-}else {
-    alert("Operador no válido")
 }
+
+function calcularCostoMinInter(operador, minInter) {
+    if (minInter) {
+        switch (operador) {
+            case "tigo":
+                return 200
+            case "claro":
+                return 100
+            case "movistar":
+                return 250
+            default:
+                return 0
+        }
+    }
+    return 0
 }
-let costoTotal = cargoFijo + (minInter * minInterCon) + paqueteDatos;
+
+function calcularCostoPaqueteDatos(operador, paqueteDatos) {
+    if (paqueteDatos) {
+        switch (operador) {
+            case "tigo":
+                return 12000
+            case "claro":
+                return 18000
+            case "movistar":
+                return 8000
+            default:
+                return 0
+        }
+    }
+    return 0
+}
+
+while (true) {
+    operador = prompt("Ingresa el operador (claro, tigo, movistar)")
+    minInter = confirm("¿Quieres minutos internacionales?")
+    paqueteDatos = confirm("¿Quieres un paquete de datos?")
+    cargoFijo = calcularCargoFijo(operador)
+    if (cargoFijo > 0) break
+}
+
+let costoMinInter = calcularCostoMinInter(operador, minInter)
+let costoPaqueteDatos = calcularCostoPaqueteDatos(operador, paqueteDatos)
+let costoTotal = cargoFijo + (costoMinInter * minInterCon) + costoPaqueteDatos
 
 alert(`El costo total del paquete es: $${costoTotal}`)

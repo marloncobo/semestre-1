@@ -1,13 +1,13 @@
 let numero
-while (true){
-numero = Number(prompt("Escribe un número"))
-if ((numero %= 2)==0 ){
-    alert("El número es par")
-    break
-}if((numero %= 2)>0){
-    alert("El número es impar")
-    break
+
+function num(numero){
+numero = prompt("Escribe un número")
+if ((numero %= 2)===0 ){
+    return  alert("El número es par")
+}else if((numero %= 2)>0){
+    return alert("El número es impar")
 }else{
-    alert("error")
-}
-}
+    alert("Ingrese un numero valido")
+    return num()
+}}
+num(numero)

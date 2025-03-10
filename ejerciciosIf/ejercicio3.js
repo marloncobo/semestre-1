@@ -1,36 +1,27 @@
-let tipoLavadora
-let cantidad
-let horas
+let tipoLavadora, cantidad, horas, costoBase, costoPorHora
 
-while (true){
-tipoLavadora = Number(prompt("Ingresa el tipo de lavadora"))
-    if (tipoLavadora<3 && tipoLavadora>0){
-    break
-}else{
-    alert("error")
-}
+function calcularCostoPorHora(tipoLavadora) {
+    return tipoLavadora === 1 ? 4000 : 3000
 }
 
-while (true){
-cantidad = Number(prompt("Ingresa la cantidad"))    
-    if (cantidad){       
-    break
-}else{
-    alert("error")
-}
-}
-
-while (true){
-horas = Number(prompt("Ingresa las horas"))    
-    if (horas>0){
-        break
-}else{
-    alert("error")
-}
+function calcularDescuento(cantidad, costoPorHora, horas) {
+    if (cantidad >= 3) {
+        return (costoPorHora * cantidad * horas) * 0.03
+    } else {
+        return 0
+    }
 }
 
-let costoPorHora = tipoLavadora === 1 ? 4000 : 3000
-let costoBase = costoPorHora * cantidad * horas
-let descuento = cantidad > 3 ? 0.03 : 0
-let Total = costoBase * (1 - descuento)
-alert(`Costo total por alquilar ${cantidad} lavadoras tipo ${tipoLavadora} por ${horas} horas: $${Total}`)
+function calcularCostoTotal(cantidad, horas, costoPorHora) {
+    let costoBase = costoPorHora * cantidad * horas
+    return costoBase - calcularDescuento(cantidad, costoPorHora, horas)
+}
+
+tipoLavadora = Number(prompt("Ingresa el tipo de lavadora \n1(grande), 2(pequeña)"))
+cantidad = Number(prompt("Ingresa la cantidad"))
+horas = Number(prompt("Ingresa las horas"))
+costoPorHora = calcularCostoPorHora(tipoLavadora)
+
+let costoTotal = calcularCostoTotal(cantidad, horas, costoPorHora)
+
+alert(`Costo total por alquilar ${cantidad} lavadoras tipo ${tipoLavadora} por ${horas} horas: $${costoTotal}`)
